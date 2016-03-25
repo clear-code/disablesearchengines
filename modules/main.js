@@ -44,7 +44,7 @@ function log(...aMessages) {
   });
 
   if (disabledItems.length > 0) { // blacklist style
-    log('applying the blacklist');
+    log('disabling specified engines...');
     disabledItems.forEach(function(aName) {
       var engine = Services.search.getEngineByName(aName);
       log('engine "' + aName + '": ' + engine);
@@ -53,7 +53,7 @@ function log(...aMessages) {
     });
   }
   else if (enabledItems.length > 0) { // whitelist style
-    log('applying the whitelist');
+    log('disabling unspecified engines...');
     Services.search.getEngines().forEach(function(aEngine, aIndex) {
       log('engine ' + aEngine + '"' + aName + '": ' + engine);
       if (enabledItems.indexOf(aEngine.name) < 0)
