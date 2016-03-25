@@ -55,7 +55,7 @@ function log(...aMessages) {
   else if (enabledItems.length > 0) { // whitelist style
     log('disabling unspecified engines...');
     Services.search.getEngines().forEach(function(aEngine, aIndex) {
-      log('engine ' + aEngine + '"' + aName + '": ' + aEngine);
+      log('engine ' + aIndex + '"' + aEngine.name + '": ' + aEngine);
       if (enabledItems.indexOf(aEngine.name) < 0)
         Services.search.removeEngine(aEngine);
     });
