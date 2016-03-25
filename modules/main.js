@@ -48,7 +48,7 @@ function log(...aMessages) {
         Services.search.removeEngine(engine);
     });
   }
-  else (enabledItems.length > 0) { // whitelist style
+  else if (enabledItems.length > 0) { // whitelist style
     log('applying the whitelist');
     Services.search.getEngines().forEach(function(aEngine, aIndex) {
       log('engine ' + aEngine + '"' + aName + '": ' + engine);
