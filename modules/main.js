@@ -23,7 +23,7 @@ function log(...aMessages) {
   if (!prefs.getPref(BASE + 'debug'))
     return;
   Services.console.logStringMessage('[disablesearchengines] ' + aMessages.map(function(aMessage) {
-    if (aMessage && typeof aMessage == 'object')
+    if (aMessage && typeof aMessage === 'object')
       return JSON.stringify(aMessage);
     else
       return aMessage;
