@@ -7,6 +7,8 @@
 var BASE = 'extensions.disablesearchengines@clear-code.com.';
 var prefs = require('lib/prefs').prefs;
 
+var { Services } = Components.utils.import('resource://gre/modules/Services.jsm', {});
+
 function toEngineNames(aString) {
   aString = aString || '';
    aString = aString.trim().split(/[,|\s]+/);
@@ -17,21 +19,40 @@ function toEngineNames(aString) {
   });
 }
 
+function log(...aMessages) {
+  if (!prefs.getPref(BASE + 'debug'))
+    return;
+  Services.console.logStringMessage('[disablesearchengines] ' + aMessages.map(function(aMessage) {
+    if (aMessage && typeof aMessage == 'object')
+      return JSON.stringify(aMessage);
+    else
+      return aMessage;
+  }).join(', '));
+}
+
 (function() {
-  var { Services } = Components.utils.import('resource://gre/modules/Services.jsm', {});
 
   var disabledItems = toEngineNames(prefs.getPref(BASE + 'disabled'));
   var enabledItems = toEngineNames(prefs.getPref(BASE + 'enabled'));
 
+  log({
+    disabledItems : disabledItems,
+    enabledItems  : enabledItems
+  });
+
   if (disabledItems.length > 0) { // blacklist style
+    log ('applying the blacklist');
     disabledItems.forEach(function(aName) {
       var engine = Services.search.getEngineByName(aName);
+      log('engine "' + aName + '": ' + engine);
       if (engine)
         Services.search.removeEngine(engine);
     });
   }
   else (enabledItems.length > 0) { // whitelist style
-    Services.search.getEngines().forEach(function(aEngine) {
+    log ('applying the whitelist');
+    Services.search.getEngines().forEach(function(aEngine, aIndex) {
+      log('engine ' + aEngine + '"' + aName + '": ' + engine);
       if (enabledItems.indexOf(aEngine.name) < 0)
         Services.search.removeEngine(aEngine);
     });
@@ -39,5 +60,5 @@ function toEngineNames(aString) {
 })();
 
 function shutdown() {
-  prefs = toEngineNames = undefined;
+  Services = prefs = toEngineNames = log = undefined;
 }
