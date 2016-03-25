@@ -7,6 +7,10 @@
 var BASE = 'extensions.disablesearchengines@clear-code.com.';
 var prefs = require('lib/prefs').prefs;
 
+prefs.setDefaultPref(BASE + 'debug',    false);
+prefs.setDefaultPref(BASE + 'disabled', '');
+prefs.setDefaultPref(BASE + 'enabled',  '');
+
 var { Services } = Components.utils.import('resource://gre/modules/Services.jsm', {});
 
 function toEngineNames(aString) {
