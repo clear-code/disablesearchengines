@@ -27,11 +27,10 @@ function log(...aMessages) {
       return JSON.stringify(aMessage);
     else
       return aMessage;
-  }).join(', '));
+  }).join(' '));
 }
 
 (function() {
-
   var disabledItems = toEngineNames(prefs.getPref(BASE + 'disabled'));
   var enabledItems = toEngineNames(prefs.getPref(BASE + 'enabled'));
 
