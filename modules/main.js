@@ -15,7 +15,7 @@ var { Services } = Components.utils.import('resource://gre/modules/Services.jsm'
 
 function toEngineNames(aString) {
   aString = aString || '';
-   aString = aString.trim().split(/[,|\s]+/);
+   aString = aString.trim().split(/[,|\n\t]+/);
   return aString.map(function(aPart) {
     return aPart.trim();
   }).filter(function(aPart) {
