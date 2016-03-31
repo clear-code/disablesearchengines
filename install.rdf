@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="disablesearchengines@clear-code.com"
                    em:name="Disable Search Engines"
-                   em:version="1.1"
+                   em:version="1.2"
                    em:description="Disables (uninstalls) specified search engines by default, via preferences."
                    em:creator="ClearCode Inc."
                    em:homepageURL="http://www.clear-code.com/"
